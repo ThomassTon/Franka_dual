@@ -60,14 +60,12 @@ class JointStateReader(Node):
 
 class Planner:
     def __init__(self):
-        # 初始化URDF、kinematics model
         context = LaunchContext()
         urdf_path = PathJoinSubstitution([
             FindPackageShare('panda_dual_basic'), 'config', 'dual_fr3.urdf'
         ]).perform(context)
         self.pk_chain_l = pk.build_serial_chain_from_urdf(open(urdf_path).read(), 'left_fr3_hand_tcp', 'world').to(device= "cuda")
         self.pk_chain_r = pk.build_serial_chain_from_urdf(open(urdf_path).read(), 'right_fr3_hand_tcp', 'world').to(device= "cuda")
-        # 可再绑定 forward_kinematics, jacobian 等函数
         self.device ='cuda'
     
     def quintic_coeff(self,q0, qf, T):
@@ -101,14 +99,13 @@ class Planner:
         j_l = self.pk_chain_l.jacobian(q[:7])
         j_r = self.pk_chain_r.jacobian(q[7:])
         # print(j_r.shape)
-        zeros1 = torch.zeros(( 6, 7), device=self.device)  # 形状 (batch, num_samples, 6, 7)
-        zeros2 = torch.zeros(( 6, 7), device=self.device)  # 形状 (batch, num_samples, 6, 7)
+        zeros1 = torch.zeros(( 6, 7), device=self.device) 
+        zeros2 = torch.zeros(( 6, 7), device=self.device)  
 
-        # 组合为块对角矩阵
-        J_top = torch.cat([j_l.squeeze(), zeros1], dim=-1)  # (batch, num_samples, 6, 14)
-        J_bottom = torch.cat([zeros2, j_r.squeeze()], dim=-1)  # (batch, num_samples, 6, 14)
+        J_top = torch.cat([j_l.squeeze(), zeros1], dim=-1) 
+        J_bottom = torch.cat([zeros2, j_r.squeeze()], dim=-1)  
 
-        J_combined = torch.cat([J_top, J_bottom], dim=-2)  # (batch, num_samples, 12, 14)
+        J_combined = torch.cat([J_top, J_bottom], dim=-2)  
         # print("j_c: ",J_combined)
         return J_combined
     
@@ -198,7 +195,6 @@ class Planner:
             if idx == 0:  time_vec = t_vec
             qs = q_vec if idx==0 else np.vstack((qs, q_vec))
         for k, tk in enumerate(time_vec):
-            print(tk)
             pt = JointTrajectoryPoint()
             pt.time_from_start.sec  = int(tk)
             pt.time_from_start.nanosec = int((tk%1)*1e9)
@@ -216,7 +212,6 @@ class Planner:
         tcp = torch.cat((tcp_p.to(self.device).squeeze(),tcp_r))
         tcp_target= torch.cat((tcp_p_target.squeeze(),tcp_r_target))
 
-        print(tcp_p.shape)
         for idx, (t_vec, q_vec) in enumerate(
             [self.sample_traj_torch(tcp_p.squeeze()[i], tcp_p_target.squeeze()[i], 3) for i in range(3)]):
             if idx == 0:  time_vec = t_vec

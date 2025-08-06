@@ -110,7 +110,6 @@ def generate_robot_nodes(context):
     FindPackageShare('panda_dual_basic'), 'config', LaunchConfiguration('urdf_file')
     ]).perform(context)
 
-    # 直接读取 urdf 文件内容
     with open(urdf_path, 'r') as urdf_file:
         robot_description = urdf_file.read()
 
