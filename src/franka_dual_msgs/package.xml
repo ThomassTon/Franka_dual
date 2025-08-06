@@ -1,0 +1,16 @@
+<?xml version="1.0"?>
+<package format="3">
+  <name>franka_dual_msgs</name>
+  <version>0.1.0</version>
+  <description>Service definitions for dual-arm FR3 demos</description>
+
+  <maintainer email="haoleitong24@gmail.com">Haolei Tong</maintainer>
+  <license>Apache-2.0</license>
+  <buildtool_depend>ament_cmake</buildtool_depend>
+  <build_depend>rosidl_default_generators</build_depend>
+  <build_depend>builtin_interfaces</build_depend>
+  <build_depend>trajectory_msgs</build_depend>
+  <exec_depend>rosidl_default_runtime</exec_depend>
+  <exec_depend>builtin_interfaces</exec_depend>
+  <member_of_group>rosidl_interface_packages</member_of_group>
+</package>

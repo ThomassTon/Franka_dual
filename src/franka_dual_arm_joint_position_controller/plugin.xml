@@ -1,0 +1,30 @@
+<library path="franka_dual_arm_joint_position_controller">
+  <class
+      name = "franka_dual_arm_joint_position_controller/DualArmPositionController"
+      type="franka_dual_arm_joint_position_controller::DualArmPositionController"
+      base_class_type="controller_interface::ControllerInterface">
+    <description>Command 14-D joint position array for dual FR3 arms</description>
+  </class>
+
+  <class
+      name = "franka_dual_arm_joint_position_controller/DualArmImpedanceController"
+      type="franka_dual_arm_joint_position_controller::DualArmImpedanceController"
+      base_class_type="controller_interface::ControllerInterface">
+    <description>Command 14-D joint position array for dual FR3 arms</description>
+  </class>
+
+  <class
+      name = "franka_dual_arm_joint_position_controller/DualArmTrajectoryController"
+      type="franka_dual_arm_joint_position_controller::DualArmTrajectoryController"
+      base_class_type="controller_interface::ControllerInterface">
+    <description>Command 14-D joint position array for dual FR3 arms</description>
+  </class>
+
+  <class
+      name = "franka_dual_arm_joint_position_controller/DualArmVelocityController"
+      type="franka_dual_arm_joint_position_controller::DualArmVelocityController"
+      base_class_type="controller_interface::ControllerInterface">
+    <description>Command 14-D joint position array for dual FR3 arms</description>
+  </class>
+
+</library>

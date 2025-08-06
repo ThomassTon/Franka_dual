@@ -1,0 +1,27 @@
+<?xml version="1.0"?>
+<package format="3">
+  <name>franka_dual_arm_joint_position_controller</name>
+  <version>0.1.0</version>
+  <description>Dual-arm position controller for two FR3 manipulators</description>
+
+  <maintainer email="haoleitong24@gmail.com">Haolei Tong</maintainer>
+  <license>Apache-2.0</license>
+  <buildtool_depend>ament_cmake</buildtool_depend>
+  <!-- build / exec deps -->
+  <depend>controller_interface</depend>
+  <depend>franka_msgs</depend>
+  <depend>franka_dual_msgs</depend>
+  <depend>franka_semantic_components</depend>
+  <depend>pinocchio</depend>
+  <depend>pluginlib</depend>
+  <depend>rclcpp</depend>
+  <depend>rclcpp_lifecycle</depend>
+  <depend>sensor_msgs</depend>
+  <depend>std_srvs</depend>
+  <build_depend>realtime_tools</build_depend>
+  <exec_depend>realtime_tools</exec_depend>
+
+  <export>
+    <build_type>ament_cmake</build_type>
+  </export>
+</package>
